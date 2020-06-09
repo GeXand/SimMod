@@ -16,19 +16,19 @@ def diffeqs(df, dt, fradfor, clim_sens):
     Differential equation for flux down.
     """
     steps = df.shape[0]
-    df.ix[0, 'fluxdown'] = (
+    df.loc[df.index[0], 'fluxdown'] = (
         (((fradfor - clim_sens * df['tocean']) / HEAT_CAPACITY) * dt)[0]
     )
     df['fluxdown'] = (
         (KAPPA * (df['tocean'].shift(1) - df['tocean']) / LAYER_HEIGHT) * dt
     )
-    df.ix[0, 'fluxdown'] = (
+    df.loc[df.index[0], 'fluxdown'] = (
         (((fradfor - clim_sens * df['tocean']) / HEAT_CAPACITY) * dt)[0]
     )
 
     df['dtocean'] = (df['fluxdown'].diff(periods = -1) / LAYER_HEIGHT) * dt
 
-    df.ix[(steps - 1), 'dtocean'] = (
+    df.loc[df.index[(steps - 1)], 'dtocean'] = (
         (df['fluxdown'] / LAYER_HEIGHT * dt)[steps - 1]
     )
     return df
