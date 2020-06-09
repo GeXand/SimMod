@@ -35,18 +35,18 @@ def emissions(run_start_year, run_end_year, dt, rcp, add_start = 0,
     steps = df.shape[0]
 
     for t in range(0,int(steps)):
-        df.ix[t, 'year'] = subset['year'][int(df['date'][t])]
-        df.ix[t, 'co2_pg'] = subset['c_emissions_pg'][int(df['date'][t])] * dt * C_TO_CO2
-        df.ix[t, 'ch4_tg'] = subset['ch4_emissions_tg'][int(df['date'][t])] * dt
-        df.ix[t, 'n2o_tg'] = subset['n2o_emissions_tg'][int(df['date'][t])] * dt
-        df.ix[t, 'hist_forcing_wm2'] = subset['hist_forcing_wm2'][int(df['date'][t])]
-        df.ix[t, 'co2_forcing_rcp'] = subset['co2_forcing_wm2'][int(df['date'][t])]
-        df.ix[t, 'ch4_forcing_rcp'] = subset['ch4_forcing_wm2'][int(df['date'][t])]
-        df.ix[t, 'n2o_forcing_rcp'] = subset['n2o_forcing_wm2'][int(df['date'][t])]
-        df.ix[t, 'total_forcing_rcp'] = subset['total_forcing_wm2'][int(df['date'][t])]
-        df.ix[t, 'rcp_co2_ppm'] = subset['co2_concentration_ppm'][int(df['date'][t])]
-        df.ix[t, 'rcp_ch4_ppb'] = subset['ch4_concentration_ppb'][int(df['date'][t])]
-        df.ix[t, 'rcp_n2o_ppb'] = subset['n2o_concentration_ppb'][int(df['date'][t])]
+        df.loc[t, 'year'] = subset['year'][int(df['date'][t])]
+        df.loc[t, 'co2_pg'] = subset['c_emissions_pg'][int(df['date'][t])] * dt * C_TO_CO2
+        df.loc[t, 'ch4_tg'] = subset['ch4_emissions_tg'][int(df['date'][t])] * dt
+        df.loc[t, 'n2o_tg'] = subset['n2o_emissions_tg'][int(df['date'][t])] * dt
+        df.loc[t, 'hist_forcing_wm2'] = subset['hist_forcing_wm2'][int(df['date'][t])]
+        df.loc[t, 'co2_forcing_rcp'] = subset['co2_forcing_wm2'][int(df['date'][t])]
+        df.loc[t, 'ch4_forcing_rcp'] = subset['ch4_forcing_wm2'][int(df['date'][t])]
+        df.loc[t, 'n2o_forcing_rcp'] = subset['n2o_forcing_wm2'][int(df['date'][t])]
+        df.loc[t, 'total_forcing_rcp'] = subset['total_forcing_wm2'][int(df['date'][t])]
+        df.loc[t, 'rcp_co2_ppm'] = subset['co2_concentration_ppm'][int(df['date'][t])]
+        df.loc[t, 'rcp_ch4_ppb'] = subset['ch4_concentration_ppb'][int(df['date'][t])]
+        df.loc[t, 'rcp_n2o_ppb'] = subset['n2o_concentration_ppb'][int(df['date'][t])]
     
     df['rcp_co2_ppm'].fillna(CO2_PPM_1750, inplace=True)
     df['rcp_ch4_ppb'].fillna(CH4_PPB_1750, inplace=True)
