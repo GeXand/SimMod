@@ -48,11 +48,11 @@ def continuous_diffusion_model(results, run_years, dt, clim_sens):
     fradfor = results['total_forcing'][0]
     df = diffeqs(df, dt, fradfor, clim_sens)
 
-    for t in range(0,int(run_years / dt)):
+    for t in range(0,int(run_years / dt)-1):
         fradfor = results['total_forcing'][t]
         df['tocean'] += dt * df['dtocean'] * 365 * 24 * 60 * 60
         df = diffeqs(df, dt, fradfor, clim_sens)
-        results.loc[df.index[t-1], 't_os'] = df.loc[df.index[0], 'tocean']
+        results.loc[df.index[t], 't_os'] = df.loc[df.index[0], 'tocean']
 
     results['t_eq'] = results['total_forcing'] / clim_sens
     results['t_s'] = (
