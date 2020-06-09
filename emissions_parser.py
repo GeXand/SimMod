@@ -13,7 +13,7 @@ def emissions(run_start_year, run_end_year, dt, rcp, add_start = 0,
     rcp_emissions = pd.read_csv('emissions/rcp_'+rcp+'_data.csv', sep=',')
     historic_emissions = pd.read_csv('emissions/historical_ghgs.csv', sep=',')
     emissions = rcp_emissions.append(historic_emissions, ignore_index=True)
-    emissions.sort(columns='year', inplace=True)
+    emissions.sort_values(columns='year', inplace=True)
     emissions.reset_index(inplace=True)
     if add_start > 0:
         emissions.loc[(
